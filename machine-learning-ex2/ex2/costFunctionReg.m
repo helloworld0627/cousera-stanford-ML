@@ -17,7 +17,20 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+sumOfHypothesis = sigmoid(X * theta);
 
+
+% cost function without regularization
+J = sum(-y.* log(sumOfHypothesis) - ( 1 - y).* log( 1 - sumOfHypothesis)) / m;
+% add regularization
+J += (lambda / (2*m)) * sum(theta(2 : length(theta)).^2)
+
+% normal gradient descent without regularization
+grad =  X' * (sumOfHypothesis - y) / m;
+
+% tricky: convert theta without theta(1)
+reg_theta = [0, theta'(2: length(theta))]'
+grad += (lambda/ m) * reg_theta;
 
 
 

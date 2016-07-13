@@ -15,13 +15,12 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
-
-
-
-
-
+s = sigmoid(X*theta);
+p = arrayfun(@biggerThanOne, s);
 
 % =========================================================================
+end
 
-
+function rtn = biggerThanOne(v)
+  if (v >= 0.5) rtn = 1; else rtn = 0; endif;
 end
