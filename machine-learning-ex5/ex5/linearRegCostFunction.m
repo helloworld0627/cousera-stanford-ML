@@ -19,16 +19,13 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+filterTheta = theta(2:end, : );
+J = sum((X * theta - y).^2 ) * 0.5 / m + sum(filterTheta .^2) * lambda * 0.5 / m;
 
 
-
-
-
-
-
-
-
-
+nonRegGrad = sum((X*theta - y) .* X) / m;
+regTheta = [0, theta'(2: length(theta)) * lambda / m ];
+grad = nonRegGrad + regTheta;
 
 % =========================================================================
 
